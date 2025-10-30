@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" version="28.2.8">
   <diagram name="Simplified Security Architecture" id="simplified_arch">
-    <mxGraphModel dx="3333" dy="1324" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="1830" dy="803" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -308,37 +308,7 @@
         <mxCell id="legend_text5" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Endpoint Traffic&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=10;" parent="1" vertex="1">
           <mxGeometry x="810" y="2140" width="160" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="summary_bg" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;TRAFFIC FLOW SUMMARY&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;verticalAlign=top;fontSize=12;fontStyle=1;align=center;" parent="1" vertex="1">
-          <mxGeometry x="70" y="2260" width="1490" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="summary1" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;① Public users → WAF/CDN (DDoS protection, TLS)&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;" parent="1" vertex="1">
-          <mxGeometry x="90" y="2290" width="350" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="summary2" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;② WAF routes traffic → Email/SaaS applications&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;" parent="1" vertex="1">
-          <mxGeometry x="90" y="2315" width="340" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="summary3" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;③ Apps authenticate via IdP/SSO with MFA&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;" parent="1" vertex="1">
-          <mxGeometry x="90" y="2340" width="320" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="summary5" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;⑤ Remote users connect via ZTNA → Staff VLAN&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;" parent="1" vertex="1">
-          <mxGeometry x="630" y="2290" width="320" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="summary6" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;⑥ All VLANs/Endpoints route via NGFW → Internet&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;" parent="1" vertex="1">
-          <mxGeometry x="630" y="2315" width="360" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="summary7" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;⑦ SaaS data backed up to immutable storage&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;" parent="1" vertex="1">
-          <mxGeometry x="630" y="2340" width="320" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="summary8" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;⑧ All layers send logs/alerts → SIEM/MDR&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;" parent="1" vertex="1">
-          <mxGeometry x="1210" y="2290" width="320" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="summary9" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;⑨ SIEM creates tickets/pages for SOC response&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;" parent="1" vertex="1">
-          <mxGeometry x="1210" y="2315" width="320" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="summary_key" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;🔑 Key Vault stores all secrets, certs, and keys&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;" parent="1" vertex="1">
-          <mxGeometry x="1210" y="2340" width="320" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="nn0ZY5U-NENnPrDUEvHL-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="ngfw_detail" target="ngfw_detail">
+        <mxCell id="nn0ZY5U-NENnPrDUEvHL-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="ngfw_detail" target="ngfw_detail" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
