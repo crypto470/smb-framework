@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" version="28.2.8">
+  <diagram name="Page-1" id="fUNeZsNOHo-pLApC6jki">
+    <mxGraphModel dx="5124" dy="2248" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-1" value="Architecture" style="text;html=1;fontSize=28;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="310" y="80" width="2510" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-2" value="Users" style="swimlane;horizontal=1;startSize=30;rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0" vertex="1" parent="1">
+          <mxGeometry x="310" y="170" width="300" height="860" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-3" value="&#xa;&#xa;Public Customers" style="shape=actor;fillColor=#BBDEFB;strokeColor=#1565C0" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-2">
+          <mxGeometry x="110" y="120" width="80" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-4" value="&#xa;Remote Staff" style="shape=actor;fillColor=#C8E6C9;strokeColor=#1B5E20" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-2">
+          <mxGeometry x="110" y="280" width="80" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-5" value="Edge &amp; App" style="swimlane;horizontal=1;startSize=30;rounded=1;fillColor=#E8F5E9;strokeColor=#2E7D32" vertex="1" parent="1">
+          <mxGeometry x="630" y="170" width="430" height="860" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-6" value="Azure Front Door + WAF" style="rounded=1;fillColor=#B3E5FC;strokeColor=#01579B;fontStyle=1" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-5">
+          <mxGeometry x="60" y="120" width="300" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-7" value="E‑Commerce App (App Service)" style="rounded=1;fillColor=#C5E1A5;strokeColor=#33691E" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-5">
+          <mxGeometry x="60" y="280" width="300" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-8" value="Azure SQL (Private Endpoint)" style="rounded=1;fillColor=#FFE082;strokeColor=#E65100" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-5">
+          <mxGeometry x="60" y="440" width="300" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-9" value="Azure Key Vault" style="rounded=1;fillColor=#F8BBD0;strokeColor=#880E4F" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-5">
+          <mxGeometry x="60" y="600" width="300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-10" value="Identity" style="swimlane;horizontal=1;startSize=30;rounded=1;fillColor=#F3E5F5;strokeColor=#6A1B9A" vertex="1" parent="1">
+          <mxGeometry x="1070" y="170" width="380" height="860" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-11" value="Entra Private Access (ZTNA)" style="rounded=1;fillColor=#E1BEE7;strokeColor=#4A148C" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-10">
+          <mxGeometry x="40" y="120" width="300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-12" value="Microsoft Entra ID (SSO/MFA/CA)" style="rounded=1;fillColor=#E1BEE7;strokeColor=#4A148C;fontStyle=1" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-10">
+          <mxGeometry x="40" y="240" width="300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-13" value="Microsoft 365 (Email/Teams/SharePoint)" style="rounded=1;fillColor=#E1BEE7;strokeColor=#4A148C" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-10">
+          <mxGeometry x="40" y="360" width="300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-14" value="On‑Prem Segmentation" style="swimlane;horizontal=1;startSize=30;rounded=1;fillColor=#FFF8E1;strokeColor=#E65100" vertex="1" parent="1">
+          <mxGeometry x="1460" y="170" width="520" height="860" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-15" value="NGFW / IPS" style="rounded=1;fillColor=#FFE0B2;strokeColor=#E65100;fontStyle=1" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-14">
+          <mxGeometry x="120" y="140" width="280" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-16" value="Server VLAN" style="rounded=1;fillColor=#FFE0B2;strokeColor=#E65100" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-14">
+          <mxGeometry x="290" y="260" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-17" value="Staff VLAN" style="rounded=1;fillColor=#FFE0B2;strokeColor=#E65100" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-14">
+          <mxGeometry x="30" y="260" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-18" value="Guest VLAN" style="rounded=1;fillColor=#FFE0B2;strokeColor=#E65100" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-14">
+          <mxGeometry x="30" y="340" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-19" value="IoT VLAN (Default‑Deny)" style="rounded=1;fillColor=#FFE0B2;strokeColor=#E65100" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-14">
+          <mxGeometry x="290" y="340" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-20" value="Quarantine VLAN" style="rounded=1;fillColor=#FFCDD2;strokeColor=#B71C1C" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-14">
+          <mxGeometry x="160" y="420" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-21" value="Site‑to‑Site VPN" style="rounded=1;fillColor=#FFE0B2;strokeColor=#E65100" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-14">
+          <mxGeometry x="120" y="520" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-22" value="SIEM &amp; Alerts" style="swimlane;horizontal=1;startSize=30;rounded=1;fillColor=#FCE4EC;strokeColor=#AD1457" vertex="1" parent="1">
+          <mxGeometry x="2000" y="170" width="340" height="860" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-23" value="Log Bus" style="rounded=1;fillColor=#F8BBD0;strokeColor=#880E4F" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-22">
+          <mxGeometry x="40" y="120" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-24" value="Microsoft Sentinel (SIEM)" style="rounded=1;fillColor=#F8BBD0;strokeColor=#880E4F;fontStyle=1" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-22">
+          <mxGeometry x="40" y="220" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-25" value="Teams Alerts / Ticketing" style="rounded=1;fillColor=#F8BBD0;strokeColor=#880E4F" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-22">
+          <mxGeometry x="40" y="320" width="260" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-26" value="Backup &amp; DR" style="swimlane;horizontal=1;startSize=30;rounded=1;fillColor=#EDE7F6;strokeColor=#5E35B1" vertex="1" parent="1">
+          <mxGeometry x="2360" y="170" width="480" height="860" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-27" value="Backup Bus" style="rounded=1;fillColor=#D1C4E9;strokeColor=#512DA8" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-26">
+          <mxGeometry x="90" y="120" width="300" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-28" value="M365 Backup (Sep tenant)" style="rounded=1;fillColor=#E1BEE7;strokeColor=#4A148C" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-26">
+          <mxGeometry x="90" y="210" width="300" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-29" value="Azure Backup Vault (App/DB)" style="rounded=1;fillColor=#E1BEE7;strokeColor=#4A148C" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-26">
+          <mxGeometry x="90" y="300" width="300" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="fCgXncrZtGYyLXWPMBFY-30" value="Immutable Storage (WORM)" style="rounded=1;fillColor=#D1C4E9;strokeColor=#512DA8" vertex="1" parent="fCgXncrZtGYyLXWPMBFY-26">
+          <mxGeometry x="90" y="390" width="300" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

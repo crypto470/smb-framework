@@ -1,190 +1,115 @@
-# **Traffic Flow**
+# Traffic Flow
 
-## 🔹 1. **Public Users → WAF/CDN → Apps (TLS-protected, DDoS-protected)**
+## F1. Public customers → Edge → App → DB (E-commerce)
 
-### Flow:
+1. Customer → **AFD/WAF** (TLS, DDoS, bot control).
+2. AFD → **App Service** (per-site rate limits; health probes).
+3. App → **Azure SQL (PE)** via private link; secrets from **Key Vault** (managed identity).
+4. App/AFD/WAF/SQL diagnostics → **Sentinel**.
+5. DB protected by Azure Defender for SQL; long-term backups via **Azure Backup Vault** → **Immutable**.
 
-Public users (like customers or API clients) connect to your public-facing web applications.
-
-### Step-by-step:
-
-1. **User request:** A browser or API client sends a request to your domain (e.g., `app.company.com`).
-2. **DNS lookup:** The DNS Security layer ensures integrity with **DNSSEC**, protecting against spoofing.
-3. **WAF/CDN entry:**
-
-   * The request hits the **Web Application Firewall (WAF)**, often combined with a **Content Delivery Network (CDN)**.
-   * CDN caches static content to speed up delivery.
-   * WAF filters malicious traffic — blocks SQL injections, XSS, bot abuse, and DDoS floods.
-4. **TLS termination:**
-
-   * TLS (HTTPS) traffic is decrypted at the WAF/CDN to inspect payloads.
-   * Optionally re-encrypted before being sent to your backend app servers or SaaS services.
-5. **Traffic passes to the application**, now verified as safe and legitimate.
-
-### Purpose:
-
-* Protects from **public-facing attacks**.
-* Optimizes global performance via CDN caching.
-* Ensures all incoming traffic is **TLS-encrypted and sanitized**.
+**Outcome:** Only sanitized HTTPS reaches the app; DB never exposed publicly; all activity logged.
 
 ---
 
-## 🔹 2. **Remote Users → ZTNA/VPN → Start VLAN**
+## F2. Remote staff
 
-### Flow:
+1. Device compliance via **Intune** (AV, patch, disk enc).
+2. User signs in with **Entra ID + MFA**; policy evaluated in **Entra Private Access (ZTNA)**.
+3. If SaaS: ZTNA → **M365 / allowed SaaS** directly.
+4. If on-prem app: ZTNA → **NGFW App Publishing** → **Server VLAN** (published ports only).
+5. **Explicitly blocked**: ZTNA → **Staff VLAN** landing.
+6. Non-compliant device → **Quarantine VLAN** or limited web.
 
-This is how employees or trusted users connect securely to internal resources.
-
-### Step-by-step:
-
-1. **User authentication:**
-
-   * Remote user connects using **Zero Trust Network Access (ZTNA)** or **VPN** client.
-   * Identity verified via **SSO/IdP** with **MFA (Multi-Factor Authentication)**.
-2. **Device posture check:**
-
-   * ZTNA ensures only compliant devices (patched, encrypted, secure) are allowed.
-3. **Network assignment:**
-
-   * Once authenticated, the user’s traffic enters the **Start VLAN** (onboarding VLAN).
-   * Network Access Control (NAC) using **802.1x authentication** places users in the correct VLAN.
-4. **Traffic tunneling:**
-
-   * Their traffic is now encrypted inside a VPN/Zero Trust tunnel to HQ or the cloud.
-
-### Purpose:
-
-* Prevents compromised or unmanaged devices from connecting.
-* Ensures all remote sessions are **authenticated, encrypted, and policy-enforced**.
+**Outcome:** Per-app ZTNA, zero trust posture; no broad network access.
 
 ---
 
-## 🔹 3. **All VLANs and Endpoints → NGFW → Internet**
+## F3. On-site users & segmentation (802.1X → VLANs → NGFW → Internet)
 
-### Flow:
+1. 802.1X/RADIUS admits endpoints into **Staff / Guest / IoT / Quarantine**.
+2. All egress from VLANs → **NGFW/IPS** (app control, URL categories, TLS decrypt where allowed).
+3. **Policy matrix (egress summary)**
 
-All network traffic — whether from remote, on-prem, IoT, or guest VLANs — is routed through a **Next-Gen Firewall (NGFW)**.
+   - Staff → Internet (filtered), Staff ↔ Server (app ports only)
+   - Server → Staff (restricted/admin), Guest → Internet only
+   - **IoT → Internet allow-list only; IoT/Guest → any internal = DENY**
 
-### Step-by-step:
-
-1. **Routing:** VLANs (Start, IoT, Server, Guest) are segmented logically to prevent lateral movement.
-2. **Inspection:**
-
-   * NGFW inspects both inbound and outbound packets.
-   * Uses **IPS/IDS** for deep packet inspection and **Geo/IP blocking** for suspicious sources.
-3. **Egress control:**
-
-   * Controls which services or destinations users can reach (e.g., blocks unapproved apps).
-4. **Logging:** All traffic logs and alerts are sent to the **SIEM** for centralized visibility.
-
-### Purpose:
-
-* Enforces **network segmentation and egress filtering**.
-* Prevents malware from exfiltrating data.
-* Ensures only approved apps/services communicate externally.
+**Outcome:** Strong east–west controls and least-privilege egress.
 
 ---
 
-## 🔹 4. **SaaS Data → Immutable Backup Storage**
+## F4. Email & SaaS hardening
 
-### Flow:
+1. **Defender for O365** (anti-phishing, Safe Links/Attachments, impersonation).
+2. SPF/DKIM/DMARC enforced (Azure DNS).
+3. **SCIM** from Entra ID to allowed SaaS (role mapping, de-provision on exit).
+4. All auth/sign-in + O365 security events → **Sentinel**.
 
-Data from SaaS applications (CRM, HR, email, etc.) is periodically backed up to a **separate, immutable storage tenant**.
-
-### Step-by-step:
-
-1. **Backup service runs** (usually through a SaaS backup vendor).
-2. **Data replicated:**
-
-   * Data is stored in another account or region.
-   * Marked **immutable** — meaning no one (not even admins) can alter or delete it before the retention period expires.
-3. **Compliance validation:**
-
-   * Ensures **RPO/RTO** goals are met (Recovery Point / Time Objectives).
-
-### Purpose:
-
-* Protects from **ransomware or insider tampering**.
-* Ensures **data availability** even if the SaaS provider or tenant is compromised.
+**Outcome:** Phishing resistance, lifecycle governance, auditable access.
 
 ---
 
-## 🔹 5. **Every Layer Sends Logs → SIEM/MDR**
+## F5. IoT isolation & kill-switch
 
-### Flow:
+1. Devices join **IoT VLAN**; **default-deny to internal**, allow-listed outbound only (NTP, vendor cloud).
+2. **Kill-switch playbook** on incident: disable IoT SSID/WiFi, shut IoT switchports, push NGFW rule **IoT→any: DENY** (keep mgmt if needed), optionally move offenders to **Quarantine VLAN**.
+3. IoT telemetry and any anomaly → **Sentinel** for alerting.
 
-Every system (firewalls, endpoints, SaaS, identity, WAF, etc.) generates **logs** and sends them to the **SIEM (Security Information and Event Management)**.
-
-### Step-by-step:
-
-1. **Log collection:**
-
-   * Logs from WAF, NGFW, IdP, endpoints, SaaS, etc. are forwarded.
-2. **Aggregation & normalization:**
-
-   * SIEM normalizes logs into a standard format.
-3. **Analysis:**
-
-   * Correlates events to detect suspicious activity (e.g., repeated failed logins + privilege escalation).
-4. **Alerting:**
-
-   * When a rule or anomaly triggers, it raises an alert.
-
-### Purpose:
-
-* Provides **real-time threat visibility** across all layers.
-* Enables correlation between seemingly unrelated events.
+**Outcome:** Compromise of IoT cannot laterally impact HQ/corporate assets.
 
 ---
 
-## 🔹 6. **SIEM → Alerts/Tickets → SOC Team**
+## F6. Logging, SIEM resilience & response
 
-### Flow:
+1. AFD/WAF, App, SQL, NGFW/IPS, Entra, M365, ZTNA, backups → **Sentinel** (Azure Monitor Agent/DCR).
+2. **Resilience**: ingestion heartbeats, queue/diagnostic settings, per-source schema checks; alerts on delayed or missing logs; alternate ingestion path for critical sources.
+3. **SOAR**: Sentinel playbooks notify **Teams/Ticketing** and can auto-contain (block IP, disable account, revoke sessions, isolate device, trigger IoT kill-switch).
+4. **MDR/SOC** triages & closes incidents with runbooks and evidence trail.
 
-When SIEM or MDR (Managed Detection & Response) detects something unusual, it automatically notifies the **SOC (Security Operations Center)**.
-
-### Step-by-step:
-
-1. **SIEM generates an alert.**
-2. **Ticketing integration:**
-
-   * Automatically creates an incident in the SOC’s platform (e.g., PagerDuty, ServiceNow, or Slack).
-3. **SOC triage:**
-
-   * Analysts review the alert, investigate logs, and respond.
-4. **Response automation:**
-
-   * Some MDRs isolate endpoints, block IPs, or revoke access tokens automatically.
-
-### Purpose:
-
-* Enables **centralized, fast incident response**.
-* Reduces mean time to detect (MTTD) and respond (MTTR).
+**Outcome:** Timely detection even if a source lags; automated, audited containment.
 
 ---
 
-## 🔹 7. **Key Vault Secures All Secrets, Certificates, and Encryption Keys**
+## F7. Backup & restore hygiene
 
-### Flow:
+1. **M365 Backup** (separate tenant; immutability).
+2. **Azure Backup Vault** protects App & **Azure SQL**; copies to **Immutable/WORM**; optional **secondary region (GRS/RA-GRS)**.
+3. **Restore-to-STAGING first**: malware scan & data validation → then restore to PROD.
+4. Targets: **RPO ≤ 24h; RTO ≤ 8h (App), ≤ 4h (M365)**.
+5. Quarterly technical restores + tabletop exercises; least-privilege “Backup Operator” role; break-glass account; **no write** from prod to backup stores.
 
-The **Key Vault / KMS (Key Management Service)** manages the cryptographic foundation of your security.
+**Outcome:** Ransomware-resilient backups with verified, clean restores.
 
-### Step-by-step:
+---
 
-1. **Secrets management:**
+## F8. Data path summary
 
-   * Stores credentials, API tokens, and connection strings securely.
-2. **Certificate storage:**
+- **Web checkout:** Customer → AFD/WAF → App → SQL (PE) → (optional) payment gateway/SaaS via allow-listed egress.
+- **Admin to internal app:** Remote Staff → ZTNA → NGFW publish → Server VLAN app (no Staff VLAN).
+- **Email:** Internet ↔ M365 through Defender for O365; events/sign-ins → Sentinel.
+- **IoT telemetry:** IoT VLAN → vendor cloud (allow-list) → logs/alerts → Sentinel.
+- **Backups:** M365/App/SQL → Backup Vaults → Immutable → optional GRS.
 
-   * Manages TLS/SSL certificates lifecycle (renewal, rotation).
-3. **Encryption keys:**
+---
 
-   * Generates and rotates encryption keys for data-at-rest and data-in-transit.
-4. **Integration:**
+## Egress/Access Matrix
 
-   * SaaS, servers, and automation scripts retrieve secrets programmatically via secure APIs.
+| Source → Destination |            Internet |                        Server VLAN |             Staff VLAN | IoT VLAN | Guest VLAN |
+| -------------------- | ------------------: | ---------------------------------: | ---------------------: | -------: | ---------: |
+| **Staff VLAN**       |    Allow (filtered) |                  Allow (app ports) |                      — |     Deny |          — |
+| **Server VLAN**      |            Restrict |                                  — |       Restrict (admin) |     Deny |       Deny |
+| **Guest VLAN**       |       Internet-only |                               Deny |                   Deny |     Deny |          — |
+| **IoT VLAN**         | **Allow-list only** |                           **Deny** |               **Deny** |        — |       Deny |
+| **ZTNA remote**      |         SaaS direct | Via NGFW publish → **Server VLAN** | **Not a landing zone** |     Deny |       Deny |
 
-### Purpose:
+(“—” = not applicable)
 
-* Ensures that encryption keys and credentials never appear in plaintext in code or config.
-* Centralizes **cryptographic governance** (rotation, auditing, lifecycle).
+---
+
+### Notes on SIEM data delay/corruption
+
+- **Detect**: set Sentinel rules for **ingestion latency** and **log integrity** (sequence gaps, schema drift).
+- **Buffer & retry**: use Azure Diagnostics/Azure Monitor with **delivery retries/queues**; for agents, enable local buffering.
+- **Alternate path**: critical logs mirrored to a secondary Log Analytics workspace or storage account for recovery.
+- **Integrity**: hash/sign high-value logs; use immutable storage for long-term retention.

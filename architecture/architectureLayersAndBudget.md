@@ -1,39 +1,18 @@
+# Architecture Layers & Budget
 
-## **Architecture Layers & Core Services**
 
-| **Layer**                 | **Purpose**                                                | **Primary Services (with cost)**                                                                   |
-| ------------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| **Edge Protection**       | Secure public traffic, DNS filtering, TLS, DDoS mitigation | Cloudflare Gateway — **$100/month**                                                                |
-| **Security Operations**   | Centralized monitoring, alerting, and response             | Microsoft Sentinel SIEM — **$250/month**, Defender MDR Lite or Arctic Wolf MDR — **$200/month**    |
-| **Cloud SaaS & Identity** | Access control, MFA, and data loss prevention              | Microsoft 365 Business Premium — **$22/user × 50 = $1,100/month**, Bitwarden Teams — **$75/month** |
-| **Endpoints**             | XDR, antivirus, MDM, patch management                      | Microsoft Defender for Business (included), Intune (included)                                      |
-| **Corporate Network**     | Firewall, segmentation, VPN, site-to-site tunnels          | Fortinet FortiGate 60F or Ubiquiti UDM SE — **$1,500 CapEx**                                       |
-| **Backup & Recovery**     | Immutable and offsite data protection                      | Acronis Cyber Protect — **$100/month**, Wasabi Cloud Storage — **$50/month**                       |
+| **Category** | **CapEx (one‑time)** | **Monthly OpEx** | **Basis / Notes** |
+|---|---:|---:|---|
+| **NGFW + branch gear** | **$1,500** | – | FortiGate/UDM SE class for HQ + small branch |
+| **Microsoft 365 Business Premium** | – | **$1,100** | $22 × 50; includes Intune + Defender for Business |
+| **Entra ID P2 (admins)** | – | **$90** | ~$9 × 10 admins (PIM, risk‑based access) |
+| **Azure Front Door + WAF** | – | **$120** | Low/medium traffic e‑commerce (rules + data transfer) |
+| **Microsoft Sentinel** | – | **$250** | ~10 GB/day effective, commitment or benefit pricing |
+| **Azure Backup (App/DB)** | – | **$80** | Vault + LTR; small DB + app artifacts; WORM tier |
+| **M365 Backup (sep tenant)** | – | **$60** | SMB tier for 50 users (mail/OD/SP) |
+| **Ticketing/Alerting (Jira/PD/Teams apps)** | – | **$100** | Basic plan for routing/on‑call |
+| **TOTAL** | **≈ $1,500** | **≈ $1,800 / month** | Microsoft‑first; removable line items marked optional below |
 
----
-
-## **NIST CSF Function Implementation**
-
-| **Function**      | **Implementation Highlights**                                                                          |
-| ----------------- | ------------------------------------------------------------------------------------------------------ |
-| **ID – Identify** | Asset inventory via Intune, risk posture via Secure Score, governance templates in SharePoint or Drata |
-| **PR – Protect**  | MFA, DLP, XDR, patching, Bitwarden vaults, Cloudflare filtering, NGFW segmentation                     |
-| **DE – Detect**   | Sentinel SIEM log correlation, Defender anomaly detection, optional MDR support                        |
-| **RS – Respond**  | Incident triage through Sentinel + Jira/PagerDuty integration, root cause documentation                |
-| **RC – Recover**  | Immutable Acronis/Wasabi backups, tested restoration, DR runbooks in SharePoint                        |
-
----
-
-## **Budget Breakdown**
-
-| **Category**                              | **CapEx**    | **Monthly OpEx**   | **Notes**                                           |
-| ----------------------------------------- | ------------ | ------------------ | --------------------------------------------------- |
-| Network gear (firewall, Wi-Fi)            | **$1,500**   | –                  | FortiGate or Ubiquiti gear for HQ and branch        |
-| Microsoft 365 Business Premium (50×$22)   | –            | **$1,100**         | Includes email, Intune, Defender, SharePoint        |
-| Cloudflare Gateway                        | –            | **$100**           | DNS filtering, DDoS protection, TLS termination     |
-| Backup (Acronis + Wasabi)               | –            | **$150**           | Immutable SaaS and endpoint backups                 |
-| SIEM / MDR (Sentinel + Arctic Wolf)     | –            | **$450**           | Centralized logging, threat detection, and response |
-| Password management (Bitwarden)         | –            | **$75**            | Team password and secret storage                    |
-| Ticketing / alerting (Jira / PagerDuty) | –            | **$100**           | Incident routing and response coordination          |
-| **Total**                                 | **≈ $1,500** | **≈ $1,475/month** | Within budget target                                |
-
+**Optional / Swappable**  
+- Password manager (if desired in addition to Entra creds): **Bitwarden Teams** ~$75/mo.  
+- Third‑party MDR add‑on: ~$200–$400/mo.
