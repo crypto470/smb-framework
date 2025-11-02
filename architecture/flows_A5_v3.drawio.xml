@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" version="28.2.8">
+  <diagram id="A5v3" name="A5 — Backups (7) — Left→Right Direction &amp; Enhanced Controls">
+    <mxGraphModel dx="4862" dy="1124" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2300" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t" value="A5 — Backups (7)" style="text;html=1;fontSize=26;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="360" y="20" width="1500" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="start" value="START" style="ellipse;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#1b5e20;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="-10" y="280" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="m365" value="(7.1) M365 Workloads (Exchange, SharePoint, OneDrive, Teams)" style="rounded=1;fillColor=#e1bee7;strokeColor=#4a148c" parent="1" vertex="1">
+          <mxGeometry x="220" y="180" width="500" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="appcfg" value="(7.1) E-Commerce App Config/Artifacts" style="rounded=1;fillColor=#c5e1a5;strokeColor=#33691e" parent="1" vertex="1">
+          <mxGeometry x="220" y="280" width="500" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="db" value="(7.1) E-Commerce DB (Azure SQL, PITR enabled)" style="rounded=1;fillColor=#ffe082;strokeColor=#e65100" parent="1" vertex="1">
+          <mxGeometry x="220" y="380" width="500" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="m365b" value="(7.2) Microsoft 365 Backup (Immutable / Separate Tenant)" style="rounded=1;fillColor=#e1bee7;strokeColor=#4a148c" parent="1" vertex="1">
+          <mxGeometry x="1050" y="180" width="520" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="azb" value="(7.2) Azure Backup Vault (App/DB) + Long-Term Retention" style="rounded=1;fillColor=#e1bee7;strokeColor=#4a148c" parent="1" vertex="1">
+          <mxGeometry x="1050" y="280" width="520" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="immut" value="(7.3) Immutable Storage / Storage Lock (WORM)" style="rounded=1;fillColor=#d1c4e9;strokeColor=#512da8" parent="1" vertex="1">
+          <mxGeometry x="1050" y="460" width="520" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="kv" value="Customer-Managed Keys (CMK) — Azure Key Vault" style="rounded=1;fillColor=#f8bbd0;strokeColor=#880e4f" parent="1" vertex="1">
+          <mxGeometry x="640" y="610" width="520" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sec_region" value="(7.4) Secondary Region Copy (GRS/RA-GRS)" style="rounded=1;fillColor=#e3f2fd;strokeColor=#1565c0" parent="1" vertex="1">
+          <mxGeometry x="1740" y="280" width="420" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="rpo" value="(7.5) RPO ≤ 24h; RTO ≤ 8h (App), ≤ 4h (M365)" style="rounded=1;fillColor=#fff9c4;strokeColor=#f57f17" parent="1" vertex="1">
+          <mxGeometry x="2260" y="150" width="480" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="restore" value="(7.6) Quarterly Restore Tests &amp; Runbooks (tabletop + technical)" style="rounded=1;fillColor=#fff9c4;strokeColor=#f57f17" parent="1" vertex="1">
+          <mxGeometry x="2260" y="250" width="480" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="staging" value="(7.6a) Restore to STAGING VNet/DB first (malware scan &amp; data validation) before PROD" style="rounded=1;fillColor=#fff9c4;strokeColor=#f57f17" parent="1" vertex="1">
+          <mxGeometry x="2260" y="350" width="480" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="archive" value="(7.7) Cold Archive after 30–90 days for cost control" style="rounded=1;fillColor=#fff9c4;strokeColor=#f57f17" parent="1" vertex="1">
+          <mxGeometry x="2260" y="450" width="480" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="sentinel" value="Microsoft Sentinel — Backup Alerts &amp; Anomaly Detection" style="rounded=1;fillColor=#f8bbd0;strokeColor=#880e4f" parent="1" vertex="1">
+          <mxGeometry x="1740" y="180" width="420" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="rbac" value="Separation of Duties: &#xa;&#xa;Backup Operator role; &#xa;break-glass account; &#xa;no production write on backup storage" style="rounded=1;fillColor=#fce4ec;strokeColor=#ad1457" parent="1" vertex="1">
+          <mxGeometry x="1740" y="380" width="420" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="e0a" value="" style="endArrow=classic;strokeColor=#1b5e20;strokeWidth=2;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="start" target="m365" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e0b" value="" style="endArrow=classic;strokeColor=#1b5e20;strokeWidth=2;dashed=1;" parent="1" source="start" target="appcfg" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e0c" value="" style="endArrow=classic;strokeColor=#1b5e20;strokeWidth=2;dashed=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="start" target="db" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="(7.2) protect" style="endArrow=classic;strokeColor=#4a148c;strokeWidth=2;" parent="1" source="m365" target="m365b" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="(7.2) protect" style="endArrow=classic;strokeColor=#4a148c;strokeWidth=2;" parent="1" source="appcfg" target="azb" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="(7.2) protect" style="endArrow=classic;strokeColor=#4a148c;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.002;entryY=0.66;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="db" target="azb" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="(7.3) immutable copy" style="endArrow=classic;strokeColor=#512da8;strokeWidth=2;dashed=1;" parent="1" source="azb" target="immut" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="CMK for vault/storage" style="endArrow=classic;strokeColor=#880e4f;strokeWidth=1.8;dashed=1;entryX=0;entryY=1;entryDx=0;entryDy=0;" parent="1" source="kv" target="azb" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5b" value="CMK for immutable store" style="endArrow=classic;strokeColor=#880e4f;strokeWidth=1.8;dashed=1;" parent="1" source="kv" target="immut" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="(7.4) replicate" style="endArrow=classic;strokeColor=#1565c0;strokeWidth=2;" parent="1" source="azb" target="sec_region" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="alerts" style="endArrow=classic;strokeColor=#880e4f;strokeWidth=1.8;dashed=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" parent="1" source="azb" target="sentinel" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1580" y="300" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7b" value="anomalies" style="endArrow=classic;strokeColor=#880e4f;strokeWidth=1.8;dashed=1;" parent="1" source="m365b" target="sentinel" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="Legend: &#xa;&#xa;(7.1) Sources  (7.2) Backup targets  (7.3) Immutability  (7.4) Secondary region  (7.5) RPO/RTO  (7.6) Restore tests  (7.7) Archive" style="rounded=1;fillColor=#ffffff;strokeColor=#333;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="1650" y="610" width="920" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

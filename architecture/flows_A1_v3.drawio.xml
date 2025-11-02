@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" version="28.2.8">
+  <diagram id="A1v2" name="A1 — Public → Edge (Flows 1–2) Detailed">
+    <mxGraphModel dx="1971" dy="865" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t" value="A1 — Public → Edge (1–2) — Azure Front Door + WAF with Origin/App" style="text;html=1;fontSize=24;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="380" y="20" width="1000" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="internet" value="INTERNET" style="rounded=1;fillColor=#f5f5f5;strokeColor=#666;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="80" y="90" width="1620" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="public" value="&#xa;&#xa;Public Users" style="shape=actor;fillColor=#dae8fc;strokeColor=#6c8ebf" parent="1" vertex="1">
+          <mxGeometry x="210" y="110" width="80" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="vendors" value="&#xa;&#xa;&#xa;3rd‑Party Vendors" style="shape=actor;fillColor=#dae8fc;strokeColor=#6c8ebf" parent="1" vertex="1">
+          <mxGeometry x="210" y="210" width="80" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="afd" value="Azure Front Door + WAF" style="rounded=1;fillColor=#b3e5fc;strokeColor=#01579b;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="500" y="150" width="260" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="afd_feats" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;• DDoS &amp;amp; Rate Limit&amp;nbsp;&lt;/font&gt;&lt;div&gt;&lt;font size=&quot;3&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;div&gt;&lt;font size=&quot;3&quot;&gt;• TLS 1.2+ Termination&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;3&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;3&quot;&gt;• Bot Mitigation&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=left;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="1100" y="150" width="150" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="app" value="E‑Commerce App (Azure App Service)" style="rounded=1;fillColor=#c5e1a5;strokeColor=#33691e" parent="1" vertex="1">
+          <mxGeometry x="480" y="440" width="300" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="static" value="Static/Media (Azure Storage + CDN)" style="rounded=1;fillColor=#c5e1a5;strokeColor=#33691e" parent="1" vertex="1">
+          <mxGeometry x="110" y="440" width="300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="db" value="E‑Commerce DB (Azure SQL — Private Endpoint)" style="rounded=1;fillColor=#ffe082;strokeColor=#e65100" parent="1" vertex="1">
+          <mxGeometry x="930" y="440" width="360" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="kv" value="Azure Key Vault (Secrets/Certs/Keys)" style="rounded=1;fillColor=#f8bbd0;strokeColor=#880e4f" parent="1" vertex="1">
+          <mxGeometry x="500" y="650" width="260" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="f1" style="endArrow=classic;strokeColor=#0d47a1;strokeWidth=2;" parent="1" source="public" target="afd" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f1b" style="endArrow=classic;strokeColor=#0d47a1;strokeWidth=2;dashed=1;" parent="1" source="vendors" target="afd" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f2" style="endArrow=classic;strokeColor=#0d47a1;strokeWidth=2;" parent="1" source="afd" target="app" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f2s" style="endArrow=classic;strokeColor=#0d47a1;strokeWidth=2;dashed=1;" parent="1" source="afd" target="static" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="app_db" style="endArrow=classic;strokeColor=#33691e;strokeWidth=2;" parent="1" source="app" target="db" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="app_kv" style="endArrow=classic;strokeColor=#880e4f;strokeWidth=1.4;dashed=1;" parent="1" source="kv" target="app" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="" style="rounded=1;fillColor=#ffffff;strokeColor=#333;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="1460" y="380" width="240" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="l1" value="" style="endArrow=classic;strokeColor=#0d47a1;strokeWidth=2;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1480" y="414.62" as="sourcePoint" />
+            <mxPoint x="1540" y="414.62" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lt1" value="Public Traffic (1–2)" style="text;html=1;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="1540" y="400" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="l2" value="" style="endArrow=classic;strokeColor=#33691e;strokeWidth=2;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1480" y="455" as="sourcePoint" />
+            <mxPoint x="1540" y="455" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lt2" value="App ↔ DB (private)" style="text;html=1;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="1545" y="440" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l3" value="" style="endArrow=classic;strokeColor=#880e4f;strokeWidth=1.6;dashed=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1480" y="490" as="sourcePoint" />
+            <mxPoint x="1540" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lt3" value="Secrets/Monitoring" style="text;html=1;fontSize=12" parent="1" vertex="1">
+          <mxGeometry x="1545" y="475" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="-EBh9Clo4KN8iEP__PL1-1" value="&lt;div&gt;&lt;div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;• Geo/IP rules&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;3&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;3&quot;&gt;• CDN caching&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;3&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;3&quot;&gt;• Health Probes&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=left;fontSize=12" vertex="1" parent="1">
+          <mxGeometry x="1330" y="150" width="150" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

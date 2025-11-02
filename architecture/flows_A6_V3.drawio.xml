@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" version="28.2.8">
+  <diagram id="A6" name="A6 - Logs → SIEM → Ticketing (Flows 8–9)">
+    <mxGraphModel dx="1281" dy="562" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t" value="A6 - Logs → SIEM → Ticketing (8–9)" style="text;html=1;fontSize=22;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="380" y="20" width="640" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="edge" value="Front Door/WAF" style="rounded=1;fillColor=#b3e5fc;strokeColor=#01579b" parent="1" vertex="1">
+          <mxGeometry x="220" y="110" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="id" value="Entra ID" style="rounded=1;fillColor=#e1bee7;strokeColor=#4a148c" parent="1" vertex="1">
+          <mxGeometry x="220" y="230" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="m365" value="Microsoft 365" style="rounded=1;fillColor=#e1bee7;strokeColor=#4a148c" parent="1" vertex="1">
+          <mxGeometry x="220" y="340" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ngfw" value="NGFW/IPS" style="rounded=1;fillColor=#ffe0b2;strokeColor=#e65100" parent="1" vertex="1">
+          <mxGeometry x="220" y="450" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="endp" value="Endpoints (Defender for Endpoint)" style="rounded=1;fillColor=#c8e6c9;strokeColor=#1b5e20" parent="1" vertex="1">
+          <mxGeometry x="220" y="560" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="siem" value="Microsoft Sentinel (NTP, Buffering, Immutable Copy)" style="rounded=1;fillColor=#f8bbd0;strokeColor=#880e4f;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="540" y="300" width="360" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ticket" value="Ticketing/Teams Alerts" style="rounded=1;fillColor=#f8bbd0;strokeColor=#880e4f" parent="1" vertex="1">
+          <mxGeometry x="950" y="300" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="soc" value="&#xa;SOC / On-Call" style="shape=actor;fillColor=#f8bbd0;strokeColor=#880e4f" parent="1" vertex="1">
+          <mxGeometry x="1230" y="310" width="60" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="endArrow=classic;strokeColor=#880e4f;dashed=1;dashPattern=2 4;strokeWidth=2;" parent="1" source="edge" target="siem" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="endArrow=classic;strokeColor=#880e4f;dashed=1;dashPattern=2 4;strokeWidth=2;" parent="1" source="id" target="siem" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="endArrow=classic;strokeColor=#880e4f;dashed=1;dashPattern=2 4;strokeWidth=2;" parent="1" source="m365" target="siem" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="endArrow=classic;strokeColor=#880e4f;dashed=1;dashPattern=2 4;strokeWidth=2;" parent="1" source="ngfw" target="siem" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" style="endArrow=classic;strokeColor=#880e4f;dashed=1;dashPattern=2 4;strokeWidth=2;" parent="1" source="endp" target="siem" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" style="endArrow=classic;strokeColor=#880e4f;dashed=1;strokeWidth=2;" parent="1" source="siem" target="ticket" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" style="endArrow=classic;strokeColor=#880e4f;dashed=1;strokeWidth=2;" parent="1" source="ticket" target="soc" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

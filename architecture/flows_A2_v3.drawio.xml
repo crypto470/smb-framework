@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" version="28.2.8">
+  <diagram id="A2v4" name="A2 — Identity &amp; SaaS Auth (Flow 3) — Left→Right Direction &amp; Steps">
+    <mxGraphModel dx="1971" dy="865" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t" value="A2 — Identity &amp;amp; SaaS Auth (3)&amp;nbsp;" style="text;html=1;fontSize=26;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="360" y="20" width="1500" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="start" value="START" style="ellipse;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#1b5e20;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry y="220" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="m365" value="(3.1) Microsoft 365 (SharePoint/OneDrive/Teams/Exchange Online)" style="rounded=1;fillColor=#e1bee7;strokeColor=#4a148c" parent="1" vertex="1">
+          <mxGeometry x="180" y="80" width="560" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="admin" value="(3.1) Admin Portals (Azure Portal, Defender, Intune)" style="rounded=1;fillColor=#e1bee7;strokeColor=#4a148c" parent="1" vertex="1">
+          <mxGeometry x="180" y="370" width="560" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="entra" value="(3.2) Microsoft Entra ID (SSO, MFA, Conditional Access, PIM)" style="rounded=1;fillColor=#e1bee7;strokeColor=#4a148c;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="1100" y="200" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="sentinel" value="(3.5) Microsoft Sentinel (Audit/Sign-in Logs, O365/Defender events)" style="rounded=1;fillColor=#f8bbd0;strokeColor=#880e4f" parent="1" vertex="1">
+          <mxGeometry x="1850" y="90" width="480" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="emailsec" value="(3.3) Defender for Office 365 (Anti-phishing, Safe Links/Attachments, Impersonation Protection)" style="rounded=1;fillColor=#d1c4e9;strokeColor=#512da8" parent="1" vertex="1">
+          <mxGeometry x="910" y="630" width="560" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="dns" value="(3.3a) SPF / DKIM / DMARC (Azure DNS &amp; M365 Auth Records)" style="rounded=1;fillColor=#d1c4e9;strokeColor=#512da8" parent="1" vertex="1">
+          <mxGeometry x="1910" y="450" width="420" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="scim" value="(3.4) SCIM Provisioning Service (User/Group Lifecycle, Role Mapping)" style="rounded=1;fillColor=#d1c4e9;strokeColor=#512da8" parent="1" vertex="1">
+          <mxGeometry x="1380" y="910" width="560" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="saas_crm" value="(3.4) SaaS — CRM" style="rounded=1;fillColor=#e3f2fd;strokeColor=#1565c0" parent="1" vertex="1">
+          <mxGeometry x="2100" y="670" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="saas_hr" value="(3.4) SaaS — HR" style="rounded=1;fillColor=#e3f2fd;strokeColor=#1565c0" parent="1" vertex="1">
+          <mxGeometry x="2100" y="790" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="saas_acc" value="(3.4) SaaS — Accounting" style="rounded=1;fillColor=#e3f2fd;strokeColor=#1565c0" parent="1" vertex="1">
+          <mxGeometry x="2100" y="910" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="s_to_m365" value="start" style="endArrow=classic;strokeColor=#1b5e20;strokeWidth=2;" parent="1" source="start" target="m365" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s_to_admin" value="" style="endArrow=classic;strokeColor=#1b5e20;strokeWidth=2;dashed=1;" parent="1" source="start" target="admin" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="auth_m365" value="(3.2) auth request" style="endArrow=classic;strokeColor=#4a148c;strokeWidth=2;" parent="1" source="m365" target="entra" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="auth_admin" value="(3.2) admin auth" style="endArrow=classic;strokeColor=#4a148c;strokeWidth=2;" parent="1" source="admin" target="entra" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="email_to_def" value="(3.3) mail flow/policy" style="endArrow=classic;strokeColor=#512da8;strokeWidth=2;" parent="1" source="m365" target="emailsec" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="entra_to_emailpol" value="(3.3) policy signals" style="endArrow=classic;strokeColor=#4a148c;strokeWidth=2;dashed=1;" parent="1" source="entra" target="emailsec" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dns_records" value="(3.3a) DNS auth records" style="endArrow=classic;strokeColor=#512da8;strokeWidth=2;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="emailsec" target="dns" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="entra_to_scim" value="(3.4) provisioning" style="endArrow=classic;strokeColor=#4a148c;strokeWidth=2;" parent="1" source="entra" target="scim" edge="1">
+          <mxGeometry x="0.4194" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="scim_to_crm" value="(3.4) users/roles" style="endArrow=classic;strokeColor=#1565c0;strokeWidth=2;" parent="1" source="scim" target="saas_crm" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="scim_to_hr" value="(3.4) users/roles" style="endArrow=classic;strokeColor=#1565c0;strokeWidth=2;" parent="1" source="scim" target="saas_hr" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="scim_to_acc" value="(3.4) users/roles" style="endArrow=classic;strokeColor=#1565c0;strokeWidth=2;" parent="1" source="scim" target="saas_acc" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="entra_logs" value="(3.5) audit/sign-in" style="endArrow=classic;strokeColor=#880e4f;strokeWidth=2;dashed=1;" parent="1" source="entra" target="sentinel" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m365_logs" value="(3.5) O365 events" style="endArrow=classic;strokeColor=#880e4f;strokeWidth=2;dashed=1;" parent="1" source="m365" target="sentinel" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="def_logs" value="(3.5) email security" style="endArrow=classic;strokeColor=#880e4f;strokeWidth=2;dashed=1;" parent="1" source="emailsec" target="sentinel" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="scim_logs" value="(3.5) provisioning" style="endArrow=classic;strokeColor=#880e4f;strokeWidth=2;dashed=1;" parent="1" source="scim" target="sentinel" edge="1">
+          <mxGeometry x="-0.4165" y="-6" relative="1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend" value="Legend:&#xa;&#xa; (3.1) Initiation &#xa; (3.2) Authentication &#xa; (3.3) Email Security &#xa;     (3.3a) DNS Auth&#xa; (3.4) Provisioning &#xa; (3.5) Logging" style="rounded=1;fillColor=#ffffff;strokeColor=#333;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="290" y="790" width="220" height="150" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

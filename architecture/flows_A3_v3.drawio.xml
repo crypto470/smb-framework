@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" version="28.2.8">
+  <diagram id="A3v3" name="A3 — Remote Access (Flow 5) — Left→Right Direction &amp; Steps">
+    <mxGraphModel dx="2135" dy="937" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2300" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t" value="A3 — Remote Access (5)&amp;nbsp;" style="text;html=1;fontSize=26;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="380" y="90" width="1500" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="start" value="&#xa;&#xa;&#xa;Remote User" style="shape=actor;fillColor=#c8e6c9;strokeColor=#1b5e20" parent="1" vertex="1">
+          <mxGeometry x="10" y="240" width="80" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="device" value="(5.1) Managed Device — Intune Compliance (AV, Patch, Disk Enc)" style="rounded=1;fillColor=#c8e6c9;strokeColor=#1b5e20" parent="1" vertex="1">
+          <mxGeometry x="240" y="235" width="440" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ztna" value="(5.2) Entra Private Access (ZTNA Broker / Policy Evaluation)" style="rounded=1;fillColor=#e1bee7;strokeColor=#4a148c" parent="1" vertex="1">
+          <mxGeometry x="860" y="235" width="420" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="entra" value="(5.3) Entra ID — SSO/MFA/Conditional Access Signals" style="rounded=1;fillColor=#e1bee7;strokeColor=#4a148c" parent="1" vertex="1">
+          <mxGeometry x="860" y="400" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="saas" value="(5.4) SaaS/Cloud Apps — Direct via ZTNA" style="rounded=1;fillColor=#d1c4e9;strokeColor=#512da8" parent="1" vertex="1">
+          <mxGeometry x="1490" y="240" width="320" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ngfw" value="(5.5) NGFW App Publishing — On-Prem App Proxy (per-app only)" style="rounded=1;fillColor=#ffe0b2;strokeColor=#e65100" parent="1" vertex="1">
+          <mxGeometry x="1490" y="370" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="server_vlan" value="(5.6) Server VLAN — Published Apps only" style="rounded=1;fillColor=#ffe0b2;strokeColor=#e65100" parent="1" vertex="1">
+          <mxGeometry x="2060" y="370" width="360" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="staff_vlan" value="Staff VLAN — NOT a Remote Landing Zone" style="rounded=1;fillColor=#ffcdd2;strokeColor=#b71c1c" parent="1" vertex="1">
+          <mxGeometry x="1490" y="520" width="420" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="block_x" value="X" style="shape=ellipse;fillColor=#ffcdd2;strokeColor=#b71c1c;fontSize=18;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="1240" y="472" width="28" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="noncomp" value="If device non-compliant → Block or Quarantine (limited web)" style="rounded=1;fillColor=#fff59d;strokeColor=#f57f17" parent="1" vertex="1">
+          <mxGeometry x="240" y="410" width="440" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="(5.1) user session" style="endArrow=classic;strokeColor=#1b5e20;strokeWidth=2;" parent="1" source="start" target="device" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="(5.2) posture check" style="endArrow=classic;strokeColor=#4a148c;strokeWidth=2;" parent="1" source="device" target="ztna" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="(5.3) auth/MFA/CA" style="endArrow=classic;strokeColor=#4a148c;strokeWidth=2;dashed=1;" parent="1" source="ztna" target="entra" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="(5.4) per-app access" style="endArrow=classic;strokeColor=#512da8;strokeWidth=2;" parent="1" source="ztna" target="saas" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="(5.5) app publish" style="endArrow=classic;strokeColor=#e65100;strokeWidth=2;" parent="1" source="ztna" target="ngfw" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="(5.6) app traffic" style="endArrow=classic;strokeColor=#e65100;strokeWidth=2;" parent="1" source="ngfw" target="server_vlan" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_block" value="non-compliant" style="endArrow=classic;strokeColor=#f57f17;strokeWidth=2;dashed=1;" parent="1" source="device" target="noncomp" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_denied" value="DENY" style="endArrow=classic;strokeColor=#b71c1c;strokeWidth=2;dashed=1;entryX=0.182;entryY=0.016;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="ztna" target="staff_vlan" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="Legend: &#xa;&#xa;(5.1) Device     (5.2) ZTNA      (5.3) Entra ID      (5.4) SaaS Direct      (5.5) NGFW Publish      (5.6) Server VLAN — Blocked: Staff VLAN" style="rounded=1;fillColor=#ffffff;strokeColor=#333;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="240" y="560" width="820" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
